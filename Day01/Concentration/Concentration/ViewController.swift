@@ -26,15 +26,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var flipCountLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
+    
+    @IBOutlet var renewButton: UIButton!
 
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCountAdd()
+        flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
         } else {
             print("chosen card was not in cardButtons")
         }
+    }
+    
+    @IBAction func touchRenewButton(_ sender: Any) {
+        game.renew()
+        for index in cardButtons.indices {
+            cardButtons[index].setTitle("", for: .normal)
+            cardButtons[index].backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        }
+        flipCount = 0
     }
     
     func updateViewFromModel() {
@@ -49,10 +60,6 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? UIColor.clear : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
         }
-    }
-    
-    func flipCountAdd() {
-        flipCount += 1
     }
     
     func emoji(for card: Card) -> String {
