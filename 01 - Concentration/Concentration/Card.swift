@@ -24,7 +24,9 @@ struct Card: Hashable {
     
     private static var identifierFactory = 0
     
+    // 静态方法无法用实例Card调用，Type Card可以调用。（类似全局函数）
     private static func getUniqueIdentifier() -> Int {
+    // 静态方法内静态函数不用调用Card.identifierFactory
         identifierFactory += 1
         return identifierFactory
     }
