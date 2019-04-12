@@ -19,8 +19,17 @@ class ViewController: UIViewController, UITableViewDelegate {
     private(set) var flipCount: Int = 0 {
         //属性观察器：在每次flipCount的值改变的时候走以下的方法。
         didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
+            updateFlipCountLabel()
         }
+    }
+    
+    private func updateFlipCountLabel() {
+        let attributes: [NSAttributedString.Key : Any] = [
+            .strokeWidth : 5,
+            .strokeColor : UIColor.orange
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
     }
 
 //    private var emojiChoices = ["🎃","👻","🦇","😱","🙀","👿","🍭","🍬","🍎"]
@@ -28,7 +37,11 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     private var emoji = [Card: String]()
     
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLabel()
+        }
+    }
     
     @IBOutlet private var cardButtons: [UIButton]!
 
