@@ -6,7 +6,7 @@
 //  Copyright © 2019 liutian. All rights reserved.
 //
 
-import UIKit
+ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate {
     
